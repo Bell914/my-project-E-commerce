@@ -531,3 +531,94 @@ button { cursor: pointer; }
   .hero-title { font-size: 2.6rem; }
 }
 
+/* ==========================================================================
+   Part 3: Flash Sale & Countdown Timer Styles
+   ========================================================================== */
+.flashsale-section {
+  padding: 40px 0 20px 0;
+}
+
+.flashsale-box {
+  background: linear-gradient(135deg, rgba(255, 51, 102, 0.15) 0%, rgba(112, 0, 255, 0.15) 100%);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  border-radius: 24px;
+  padding: 24px 32px;
+}
+
+.flashsale-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.flashsale-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flash-icon {
+  font-size: 2rem;
+  color: var(--accent-primary);
+  animation: flashIcon 1s infinite alternate;
+}
+
+@keyframes flashIcon {
+  0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--accent-primary)); }
+  100% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--accent-primary)); }
+}
+
+.flashsale-title h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-unit {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+}
+
+.time-unit span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+}
+
+.time-unit label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.time-sep {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent-primary);
+}
+
+
