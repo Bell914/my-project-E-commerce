@@ -204,6 +204,80 @@
         </div>
       </div>
     </section>
+
+    <!-- ==================== PART 4: CATALOG TOOLBAR & PRODUCT GRID ==================== -->
+    <section class="catalog-section" id="catalog">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">คอลเลกชันสินค้า <span class="gradient-text">ทั้งหมด</span></h2>
+            <p class="section-desc">เลือกชมเสื้อผ้าคุณภาพสูง ปรับแต่งไซส์และสไตล์ตามที่คุณต้องการ</p>
+          </div>
+          <div class="catalog-summary">
+            แสดงสินค้า <strong id="productCount">0</strong> รายการ
+          </div>
+        </div>
+
+        <!-- Toolbar: Category Pills, Price Filter & Sort Dropdown -->
+        <div class="catalog-toolbar">
+          <!-- Category Filter Pills -->
+          <div class="category-pills" id="categoryPills">
+            <button class="pill-btn active" data-category="all">ทั้งหมด</button>
+            <button class="pill-btn" data-category="tshirt"><i class="fa-solid fa-shirt"></i> เสื้อยืด</button>
+            <button class="pill-btn" data-category="hoodie"><i class="fa-solid fa-vest"></i> เสื้อฮู้ด</button>
+            <button class="pill-btn" data-category="jacket"><i class="fa-solid fa-user-ninja"></i> แจ็กเก็ต</button>
+            <button class="pill-btn" data-category="pants"><i class="fa-solid fa-socks"></i> กางเกง</button>
+            <button class="pill-btn" data-category="accessory"><i class="fa-solid fa-glasses"></i> แอคเซสเซอรี</button>
+          </div>
+
+          <!-- Sorting & Price Filter Options -->
+          <div class="toolbar-right">
+            <div class="filter-dropdown-wrapper">
+              <label for="priceFilter"><i class="fa-solid fa-sliders"></i> ราคา:</label>
+              <select id="priceFilter" class="custom-select">
+                <option value="all">ทุกช่วงราคา</option>
+                <option value="0-500">ต่ำกว่า ฿500</option>
+                <option value="500-1500">฿500 - ฿1,500</option>
+                <option value="1500-3000">฿1,500 - ฿3,000</option>
+                <option value="3000+">มากกว่า ฿3,000</option>
+              </select>
+            </div>
+
+            <div class="sort-dropdown-wrapper">
+              <label for="sortSelect"><i class="fa-solid fa-arrow-down-short-wide"></i> เรียงตาม:</label>
+              <select id="sortSelect" class="custom-select">
+                <option value="popular">ความนิยมสูงสุด</option>
+                <option value="newest">สินค้าใหม่ล่าสุด</option>
+                <option value="price-asc">ราคา: ต่ำ ➔ สูง</option>
+                <option value="price-desc">ราคา: สูง ➔ ต่ำ</option>
+                <option value="rating">คะแนนรีวิวสูงสุด</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Filter Tags Display -->
+        <div class="active-filters" id="activeFilters" style="display: none;">
+          <span class="active-filter-label">ตัวกรองที่เลือก:</span>
+          <div id="filterTags" class="tags-container"></div>
+          <button id="clearFiltersBtn" class="clear-filters-btn"><i class="fa-solid fa-xmark"></i> ล้างตัวกรองทั้งหมด</button>
+        </div>
+
+        <!-- Main Product Cards Grid -->
+        <div class="product-grid" id="productGrid">
+          <!-- Dynamic Product Cards Injected by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-products-state" id="emptyState" style="display: none;">
+          <div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>ไม่พบสินค้าที่คุณค้นหา</h3>
+          <p>ลองปรับคำค้นหาหรือเปลี่ยนตัวกรองหมวดหมู่และราคาดูนะครับ</p>
+          <button class="btn btn-secondary" onclick="resetFilters()">รีเซ็ตการค้นหา</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- App Script -->
