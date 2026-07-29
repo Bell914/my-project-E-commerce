@@ -397,6 +397,235 @@
     </div>
   </footer>
 
+  <!-- ==================== PART 6: MODALS & DRAWERS ==================== -->
+
+  <!-- Shopping Cart Drawer Overlay & Container -->
+  <div class="drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping"></i> ตะกร้าสินค้าของคุณ (<span id="cartDrawerCount">0</span>)</h3>
+      <button class="close-drawer-btn" id="closeCartBtn" aria-label="Close Cart"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="drawer-body" id="cartItemsContainer">
+      <!-- Dynamic Cart Items Injected by JS -->
+    </div>
+
+    <div class="drawer-footer">
+      <!-- Coupon Section -->
+      <div class="coupon-section">
+        <div class="coupon-input-group">
+          <input type="text" id="couponInput" placeholder="กรอกโค้ดส่วนลด (เช่น AURA15)" style="text-transform: uppercase;">
+          <button id="applyCouponBtn" class="btn btn-secondary btn-sm">ใช้โค้ด</button>
+        </div>
+        <div id="couponMessage" class="coupon-msg"></div>
+      </div>
+
+      <!-- Price Calculations Summary -->
+      <div class="price-summary">
+        <div class="summary-row">
+          <span>ราคารวมสินค้า:</span>
+          <span id="summarySubtotal">฿0</span>
+        </div>
+        <div class="summary-row discount-row" id="discountRow" style="display: none;">
+          <span>ส่วนลดโค้ดโปรโมชัน:</span>
+          <span id="summaryDiscount" class="text-success">-฿0</span>
+        </div>
+        <div class="summary-row">
+          <span>ค่าจัดส่ง:</span>
+          <span id="summaryShipping">฿0</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row total-row">
+          <strong>ราคาสุทธิทั้งสิ้น:</strong>
+          <strong id="summaryGrandTotal" class="gradient-text">฿0</strong>
+        </div>
+      </div>
+
+      <button id="checkoutBtn" class="btn btn-primary btn-block btn-lg btn-glow">
+        <span>ดำเนินการชำระเงิน</span> <i class="fa-solid fa-credit-card"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Product Quick View Modal -->
+  <div class="modal-backdrop" id="quickViewBackdrop"></div>
+  <div class="modal-dialog" id="quickViewModal">
+    <button class="close-modal-btn" id="closeQuickViewBtn"><i class="fa-solid fa-xmark"></i></button>
+    <div class="quickview-body" id="quickViewContent">
+      <!-- Injected Dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- Checkout & Payment Simulator Modal -->
+  <div class="modal-backdrop" id="checkoutBackdrop"></div>
+  <div class="modal-dialog checkout-modal" id="checkoutModal">
+    <button class="close-modal-btn" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
+    <div class="checkout-grid">
+      <!-- Left: Shipping & Payment Form -->
+      <div class="checkout-form-side">
+        <h2><i class="fa-solid fa-truck-ramp-box"></i> ข้อมูลการจัดส่ง & ชำระเงิน</h2>
+        <form id="checkoutForm" onsubmit="handlePaymentSubmit(event)">
+          <div class="form-group">
+            <label for="custName"><i class="fa-regular fa-user"></i> ชื่อ-นามสกุล ผู้รับ *</label>
+            <input type="text" id="custName" placeholder="เช่น สมนึก ใจดี" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custPhone"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์ *</label>
+              <input type="tel" id="custPhone" placeholder="08X-XXX-XXXX" required pattern="[0-9]{9,10}">
+            </div>
+            <div class="form-group">
+              <label for="custEmail"><i class="fa-regular fa-envelope"></i> อีเมล</label>
+              <input type="email" id="custEmail" placeholder="name@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="custAddress"><i class="fa-solid fa-location-dot"></i> ที่อยู่จัดส่งฉบับเต็ม *</label>
+            <textarea id="custAddress" rows="3" placeholder="บ้านเลขที่, ซอย, ถนน, แขวง/ตำบล, เขต/อำเภอ, จังหวัด, รหัสไปรษณีย์" required></textarea>
+          </div>
+
+          <!-- Payment Method Selection -->
+          <div class="payment-methods-selector">
+            <label class="form-section-title"><i class="fa-solid fa-wallet"></i> เลือกช่องทางการชำระเงิน *</label>
+            <div class="payment-options">
+              <label class="payment-option active">
+                <input type="radio" name="paymentMethod" value="promptpay" checked onchange="togglePaymentFields('promptpay')">
+                <div class="option-content">
+                  <i class="fa-solid fa-qrcode"></i>
+                  <span>PromptPay QR</span>
+                  <small>สแกนผ่านแอปธนาคาร</small>
+                </div>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="card" onchange="togglePaymentFields('card')">
+                <div class="option-content">
+                  <i class="fa-solid fa-credit-card"></i>
+                  <span>บัตรเครดิต</span>
+                  <small>Visa, Mastercard</small>
+                </div>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="truemoney" onchange="togglePaymentFields('truemoney')">
+                <div class="option-content">
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                  <span>TrueMoney</span>
+                  <small>แอป TrueMoney</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Payment Details Panel -->
+          <div class="payment-details-box" id="paymentDetailsBox">
+            <div id="promptpayDisplay" class="pay-display">
+              <div class="qr-code-box">
+                <div class="qr-placeholder">
+                  <i class="fa-solid fa-qrcode qr-icon"></i>
+                  <span class="qr-text">สแกนชำระเงิน <strong>AURA PAY</strong></span>
+                </div>
+                <div class="qr-amount">ยอดชำระ: <strong id="qrTotalAmount" class="gradient-text">฿0</strong></div>
+              </div>
+            </div>
+
+            <div id="cardDisplay" class="pay-display" style="display: none;">
+              <div class="form-group">
+                <label>หมายเลขบัตรเครดิต</label>
+                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>วันหมดอายุ</label>
+                  <input type="text" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="password" placeholder="123" maxlength="4">
+                </div>
+              </div>
+            </div>
+
+            <div id="truemoneyDisplay" class="pay-display" style="display: none;">
+              <div class="form-group">
+                <label>เบอร์โทรศัพท์ TrueMoney Wallet</label>
+                <input type="tel" placeholder="08X-XXX-XXXX">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg btn-glow mt-4">
+            <i class="fa-solid fa-lock"></i> <span>ยืนยันการสั่งซื้อและชำระเงิน</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Order Summary Preview -->
+      <div class="checkout-summary-side">
+        <h3><i class="fa-solid fa-receipt"></i> สรุปรายการสั่งซื้อ</h3>
+        <div class="checkout-items-list" id="checkoutItemsList"></div>
+        <div class="checkout-totals">
+          <div class="summary-row">
+            <span>ราคารวมสินค้า:</span>
+            <span id="coSubtotal">฿0</span>
+          </div>
+          <div class="summary-row discount-row" id="coDiscountRow" style="display: none;">
+            <span>ส่วนลด:</span>
+            <span id="coDiscount" class="text-success">-฿0</span>
+          </div>
+          <div class="summary-row">
+            <span>ค่าจัดส่ง:</span>
+            <span id="coShipping">฿0</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row total-row">
+            <strong>รวมชำระทั้งสิ้น:</strong>
+            <strong id="coGrandTotal" class="gradient-text">฿0</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Success Confirmation Modal -->
+  <div class="modal-backdrop" id="successBackdrop"></div>
+  <div class="modal-dialog success-modal" id="successModal">
+    <div class="success-icon-wrapper">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <h2>การสั่งซื้อเสร็จสมบูรณ์!</h2>
+    <p>ขอบคุณสำหรับการสั่งซื้อสินค้ากับ AURA STREETWEAR</p>
+    
+    <div class="order-receipt-card">
+      <div class="receipt-row">
+        <span>หมายเลขออเดอร์:</span>
+        <strong id="receiptOrderId" class="gradient-text">#AUR-89412</strong>
+      </div>
+      <div class="receipt-row">
+        <span>เลขพัสดุจำลอง (Tracking):</span>
+        <strong id="receiptTracking">TH2026-EXPRESS-992</strong>
+      </div>
+      <div class="receipt-row">
+        <span>ยอดชำระเงินรวม:</span>
+        <strong id="receiptTotal">฿0</strong>
+      </div>
+      <div class="receipt-row">
+        <span>สถานะคำสั่งซื้อ:</span>
+        <span class="status-badge"><i class="fa-solid fa-box"></i> กำลังเตรียมจัดส่ง</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block btn-glow" onclick="closeSuccessModal()">
+      <span>กลับสู่หน้าหลักช้อปปิ้งต่อ</span>
+    </button>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <!-- App Script -->
   <script src="script.js"></script>
 </body>
