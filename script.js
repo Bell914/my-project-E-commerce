@@ -19,7 +19,7 @@ const PRODUCTS = [
   },
   {
     id: 'prod-2',
-    name: 'Cyberpunk Techwear Jacket',
+    name: 'Minimal Essential Jacket',
     category: 'jacket',
     price: 2490,
     originalPrice: 3200,
@@ -30,7 +30,7 @@ const PRODUCTS = [
     sizes: ['M', 'L', 'XL'],
     image: './images/jacket.png',
     fallbackImage: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80',
-    description: 'แจ็กเก็ตสไตล์ Cyberpunk Techwear ผลิตจากผ้ากันน้ำ ซิปเมทัลลิกพรีเมียม กระเป๋าจัดเก็บสิ่งของอเนกประสงค์ 6 ช่อง'
+    description: 'แจ็กเก็ตสไตล์มินิมอลตัดเย็บเนี๊ยบ ผลิตจากผ้ากันน้ำ ซิปเมทัลลิกพรีเมียม กระเป๋าจัดเก็บสิ่งของอเนกประสงค์ 6 ช่อง'
   },
   {
     id: 'prod-3',
@@ -102,7 +102,7 @@ let state = {
   activeCategory: 'all',
   searchQuery: '',
   appliedCoupon: null,
-  theme: localStorage.getItem('aura_theme') || 'dark'
+  theme: localStorage.getItem('aura_theme') || 'light'
 };
 
 const COUPONS = {
