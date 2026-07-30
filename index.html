@@ -179,6 +179,66 @@
       </div>
     </section>
 
+    <!-- ==================== NEW COLLECTION SHOWCASE SECTION ==================== -->
+    <section class="collection-section" id="featured">
+      <div class="container">
+        <div class="section-header text-center" style="margin-bottom: 40px;">
+          <div>
+            <span class="sub-heading-tag"><i class="fa-solid fa-layer-group"></i> FEATURED COLLECTIONS</span>
+            <h2 class="section-title" style="margin-top: 8px;">คอลเลกชันใหม่ล่าสุด 2026</h2>
+            <p class="section-desc">สัมผัสดีไซน์ที่คัดสรรมาเป็นพิเศษ เพื่อลุคมินิมอล เรียบหรู ใส่ได้ในทุกโอกาส</p>
+          </div>
+        </div>
+
+        <div class="collection-grid">
+          <!-- Card 1: Urban Minimalist -->
+          <div class="collection-card">
+            <div class="collection-img-box">
+              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Urban Minimalist">
+              <span class="collection-badge">COLLECTION 01</span>
+            </div>
+            <div class="collection-content">
+              <h3>Urban Minimalist</h3>
+              <p>เสื้อยืดและเสื้อฮู้ดทรง Oversized ผ้าฝ้ายพรีเมียม สวมใส่สบาย ระบายอากาศเยี่ยม</p>
+              <button class="btn btn-secondary btn-sm" onclick="filterByCollection('urban-minimal')">
+                <span>ดูสินค้าคอลเลกชันนี้</span> <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Monochrome Essentials -->
+          <div class="collection-card">
+            <div class="collection-img-box">
+              <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80" alt="Monochrome Essentials">
+              <span class="collection-badge">COLLECTION 02</span>
+            </div>
+            <div class="collection-content">
+              <h3>Monochrome Essentials</h3>
+              <p>เสื้อผ้าคุมโทน ขาว-ดำ-เบจ เรียบหรู คลาสสิก แมตช์ง่าย ได้ทุกสไตล์</p>
+              <button class="btn btn-secondary btn-sm" onclick="filterByCollection('monochrome')">
+                <span>ดูสินค้าคอลเลกชันนี้</span> <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Tech & Casual Hybrid -->
+          <div class="collection-card">
+            <div class="collection-img-box">
+              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80" alt="Tech & Casual Hybrid">
+              <span class="collection-badge">COLLECTION 03</span>
+            </div>
+            <div class="collection-content">
+              <h3>Tech & Casual Hybrid</h3>
+              <p>แจ็กเก็ตและกางเกงคาร์โก้ผ้ากันน้ำ ฟังก์ชันจัดเต็มเพื่อชีวิตคนเมือง</p>
+              <button class="btn btn-secondary btn-sm" onclick="filterByCollection('tech-hybrid')">
+                <span>ดูสินค้าคอลเลกชันนี้</span> <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ==================== PART 3: FLASH SALE & COUNTDOWN TIMER ==================== -->
     <section class="flashsale-section" id="flashsale">
       <div class="container">
@@ -224,11 +284,11 @@
           <!-- Category Filter Pills -->
           <div class="category-pills" id="categoryPills">
             <button class="pill-btn active" data-category="all">ทั้งหมด</button>
+            <button class="pill-btn" data-category="new"><i class="fa-solid fa-sparkles"></i> มาใหม่</button>
             <button class="pill-btn" data-category="tshirt"><i class="fa-solid fa-shirt"></i> เสื้อยืด</button>
             <button class="pill-btn" data-category="hoodie"><i class="fa-solid fa-vest"></i> เสื้อฮู้ด</button>
             <button class="pill-btn" data-category="jacket"><i class="fa-solid fa-user-ninja"></i> แจ็กเก็ต</button>
             <button class="pill-btn" data-category="pants"><i class="fa-solid fa-socks"></i> กางเกง</button>
-            <button class="pill-btn" data-category="accessory"><i class="fa-solid fa-glasses"></i> แอคเซสเซอรี</button>
           </div>
 
           <!-- Sorting & Price Filter Options -->

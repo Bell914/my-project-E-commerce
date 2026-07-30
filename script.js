@@ -6,6 +6,7 @@ const PRODUCTS = [
     id: 'prod-1',
     name: 'Oversized Acid Wash Tee',
     category: 'tshirt',
+    collection: 'urban-minimal',
     price: 690,
     originalPrice: 890,
     rating: 4.9,
@@ -21,6 +22,7 @@ const PRODUCTS = [
     id: 'prod-2',
     name: 'Minimal Essential Jacket',
     category: 'jacket',
+    collection: 'tech-hybrid',
     price: 2490,
     originalPrice: 3200,
     rating: 5.0,
@@ -36,6 +38,7 @@ const PRODUCTS = [
     id: 'prod-3',
     name: 'Minimal Beige Heavy Hoodie',
     category: 'hoodie',
+    collection: 'monochrome',
     price: 1490,
     originalPrice: 1890,
     rating: 4.8,
@@ -51,6 +54,7 @@ const PRODUCTS = [
     id: 'prod-4',
     name: 'Tactical Multi-Pocket Cargo Pants',
     category: 'pants',
+    collection: 'tech-hybrid',
     price: 1290,
     originalPrice: 1690,
     rating: 4.9,
@@ -66,6 +70,7 @@ const PRODUCTS = [
     id: 'prod-5',
     name: 'Aura Signature Graphic Hoodie',
     category: 'hoodie',
+    collection: 'urban-minimal',
     price: 1690,
     originalPrice: 1990,
     rating: 4.7,
@@ -81,6 +86,7 @@ const PRODUCTS = [
     id: 'prod-6',
     name: 'Vintage Wash Oversized Tee',
     category: 'tshirt',
+    collection: 'monochrome',
     price: 590,
     originalPrice: 790,
     rating: 4.9,
@@ -100,6 +106,7 @@ let state = {
   cart: JSON.parse(localStorage.getItem('aura_cart') || '[]'),
   wishlist: JSON.parse(localStorage.getItem('aura_wishlist') || '[]'),
   activeCategory: 'all',
+  activeCollection: null,
   searchQuery: '',
   appliedCoupon: null,
   theme: localStorage.getItem('aura_theme') || 'light'
@@ -160,6 +167,7 @@ function initListeners() {
       categoryPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       state.activeCategory = pill.getAttribute('data-category');
+      state.activeCollection = null;
       filterProducts();
     });
   });
@@ -195,8 +203,17 @@ function initListeners() {
 function renderProducts() {
   const grid = document.getElementById('productGrid');
   const countEl = document.getElementById('productCount');
+  const emptyState = document.getElementById('emptyState');
   if (countEl) countEl.textContent = state.products.length;
   if (!grid) return;
+
+  if (state.products.length === 0) {
+    grid.innerHTML = '';
+    if (emptyState) emptyState.style.display = 'block';
+    return;
+  } else {
+    if (emptyState) emptyState.style.display = 'none';
+  }
 
   grid.innerHTML = state.products.map(p => `
     <div class="product-card">
@@ -237,8 +254,14 @@ function renderProducts() {
 function filterProducts() {
   let list = [...PRODUCTS];
 
-  if (state.activeCategory !== 'all') {
+  if (state.activeCategory === 'new') {
+    list = list.filter(p => p.badgeClass === 'new');
+  } else if (state.activeCategory !== 'all') {
     list = list.filter(p => p.category === state.activeCategory);
+  }
+
+  if (state.activeCollection) {
+    list = list.filter(p => p.collection === state.activeCollection);
   }
 
   if (state.searchQuery) {
@@ -247,6 +270,23 @@ function filterProducts() {
 
   state.products = list;
   renderProducts();
+}
+
+function filterByCollection(collectionKey) {
+  state.activeCategory = 'all';
+  state.activeCollection = collectionKey;
+
+  const categoryPills = document.querySelectorAll('#categoryPills .pill-btn');
+  categoryPills.forEach(p => p.classList.remove('active'));
+  const allPill = document.querySelector('#categoryPills .pill-btn[data-category="all"]');
+  if (allPill) allPill.classList.add('active');
+
+  filterProducts();
+
+  const catalogEl = document.getElementById('catalog');
+  if (catalogEl) {
+    catalogEl.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 // 5. CART ENGINE
